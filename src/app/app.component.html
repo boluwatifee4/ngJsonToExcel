@@ -1,1 +1,22 @@
-<button>Export Data to Excel</button>
+
+<h1>API RESPONSE DATA</h1>
+<p>This data is presented from the JSON format</p>
+
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Useh Id</th>
+        <th>Title</th>
+        <th>Body</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let data of apiJsonResponseData">
+            <td>{{data.id}}</td>
+            <td>{{data.userId}}</td>
+            <td>{{data.title}}</td>
+            <td>{{data.body}}</td>
+        </tr>
+    </tbody>
+</table>
+<button (click)=" exportEcel()">Export Data to Excel</button>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ExcelServiceService } from './excel-service.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,17 +13,31 @@ export class AppComponent {
 
   constructor(
     private excelService: ExcelServiceService,
-    private http: HttpClient
+
+
   ){
-   
+    this.storeDummyData();
   }
 
-  getDummyData(): Observable<any> {
-   return  this.http.get('https://jsonplaceholder.typicode.com/posts')
- } 
+
+
+ storeDummyData(): void {
+    this.excelService.getDummyData().subscribe((data) => {
+      this.apiJsonResponseData = data;
+      // console.log("data",this.apiJsonResponseData);
+    })
+  }
  
   exportEcel(): void {
-
+    const fileToExport = this.apiJsonResponseData.map((items:any) =>{
+      return {
+        "User Id": items?.userId,
+        "Id": items?.id,
+        "Title": items?.title,
+        "Body": items?.body
+      }
+    });
+    this.excelService.exportToExcel(fileToExport, 'OurExcelFile.xlsx' + new Date().getTime());
   }
 
 

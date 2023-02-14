@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 const EXCEL_EXTENSION = '.xlsx';
 @Injectable({
   providedIn: 'root'
 })
 export class ExcelServiceService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+    getDummyData(): Observable<any> {
+   return  this.http.get('https://jsonplaceholder.typicode.com/posts')
+ } 
   public exportToExcel(element: any, fileName: string): void {
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(element);
     // generate workbook and add the worksheet

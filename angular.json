@@ -102,5 +102,8 @@
       }
     }
   },
-  "defaultProject": "ngJson2Excel"
+  "defaultProject": "ngJson2Excel",
+  "cli": {
+    "analytics": "ccd58211-94e6-46b6-bf80-ed1d898c8aaf"
+  }
 }
